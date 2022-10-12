@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "DLWMS.ConsoleApp": {
+      "commandName": "Project",
+      "commandLineArgs": "denis music fit"
+    }
+  }
+}
