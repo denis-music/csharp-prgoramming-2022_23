@@ -20,9 +20,8 @@ namespace DLWMS.ConsoleApp.Predavanja.P2
             //SlanjeParametara();
             //Imutabilnost();
             //Dekonstrukcija();
-            // Params();
-            Indekseri();
-
+            //Params();
+            //Indekseri();
         }
 
         private static void Indekseri()
@@ -45,7 +44,6 @@ namespace DLWMS.ConsoleApp.Predavanja.P2
 
             var tekst1 = string.Join("*", 2, 35, 8, 6, 12, 6565, 654);
             var tekst2 = string.Join(" - ", "denis","fit", "mostar");
-
         }
 
         private static int Sumiraj(params int [] niz)
@@ -55,10 +53,12 @@ namespace DLWMS.ConsoleApp.Predavanja.P2
                 suma += niz[i];
             return suma;
         }
+
         private static int Sumiraj2(params int[] niz)
         {
             return niz.Sum();            
         }
+
         private static int Sumiraj3(params int[] niz) =>  niz.Sum();
         
         private static void Dekonstrukcija()
@@ -160,12 +160,6 @@ namespace DLWMS.ConsoleApp.Predavanja.P2
                 studenti[i].Prezime = $"Prezime{i}";
                 studenti[i].GodinaStudija = i + 1;
             }
-
-
-          
-
-
-
         }
 
         private static void VrijednostiReference()

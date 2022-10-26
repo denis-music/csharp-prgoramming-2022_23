@@ -12,7 +12,7 @@ namespace DLWMS.ConsoleApp.Predavanja.P1
             //VrsteTipovaPodataka();
             //BazniTip();
             //NovaVerzijaMetode();
-            KonekcijaNaBazu();
+            //KonekcijaNaBazu();
         }
 
         private static void KonekcijaNaBazu()
@@ -23,7 +23,6 @@ namespace DLWMS.ConsoleApp.Predavanja.P1
             {
                 Console.WriteLine(student);
             }
-
         }
 
         private static void NovaVerzijaMetode()
@@ -88,7 +87,6 @@ namespace DLWMS.ConsoleApp.Predavanja.P1
                 int* p = &indeks;
                 *p = 220021;
             }
-
         }
 
         private static void TipoviPodataka()

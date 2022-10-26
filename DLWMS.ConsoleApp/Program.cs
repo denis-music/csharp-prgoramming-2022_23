@@ -3,6 +3,7 @@
 
 using DLWMS.ConsoleApp.Predavanja.P1;
 using DLWMS.ConsoleApp.Predavanja.P2;
+using DLWMS.ConsoleApp.Predavanja.P3;
 
 using System.Text;
 
@@ -14,7 +15,7 @@ namespace DLWMS.ConsoleApp
         public static void Main(string[] args)
         {
 
-            MainP2.Pokreni();
+            MainP3.Pokreni(new FileLogger());
 
             //for (int i = 0; i < args.Length; i++)
             //{
