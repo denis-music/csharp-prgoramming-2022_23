@@ -1,14 +1,7 @@
 ﻿using DLWMS.Data;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace DLWMS.ConsoleApp.Predavanja.P2
 {
-      
     public class MainP2
     {
         public static void Pokreni()

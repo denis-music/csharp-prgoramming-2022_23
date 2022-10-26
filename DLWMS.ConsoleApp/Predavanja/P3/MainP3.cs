@@ -1,10 +1,7 @@
 ﻿using DLWMS.Data;
 
 namespace DLWMS.ConsoleApp.Predavanja.P3
-{
-    /*
-    IDisposable, using 
-     */
+{    
 
     internal class MainP3
     {
@@ -13,7 +10,7 @@ namespace DLWMS.ConsoleApp.Predavanja.P3
         {
             //Nasljedjivanje();
             //Interfejsi();
-            _logger = logger;
+            //_logger = logger;
             //Logiranje();
             //Repository();
             //DisposableInterfejs();
