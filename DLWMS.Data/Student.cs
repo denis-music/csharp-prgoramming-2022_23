@@ -74,7 +74,6 @@
         }
 
     }
-
     public class Konekcija
     {
         public Student GetStudentByIndeks(string indeks)
