@@ -22,9 +22,7 @@ namespace DLWMS.WinForms
         }
 
         private void btnPrijava_Click(object sender, EventArgs e)
-        {
-
-            
+        {           
 
             var korisnickoIme = txtKorisnickoIme.Text;
             var lozinka = txtLozinka.Text;
