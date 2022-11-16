@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=6.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=6.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DobroDosli" xml:space="preserve">
     <value>Dobro nam došli</value>
@@ -131,5 +131,11 @@
   </data>
   <data name="PodaciNisuValidni" xml:space="preserve">
     <value>Uneseni podaci nisu validni</value>
+  </data>
+  <data name="PodaciUspjesnoDodati" xml:space="preserve">
+    <value>Podaci uspješno dodati u bazu</value>
+  </data>
+  <data name="PodaciUspjesnoModifikovani" xml:space="preserve">
+    <value>Podaci uspjenso modifikovani</value>
   </data>
 </root>

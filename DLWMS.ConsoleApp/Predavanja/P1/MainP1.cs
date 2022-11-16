@@ -18,7 +18,7 @@ namespace DLWMS.ConsoleApp.Predavanja.P1
         private static void KonekcijaNaBazu()
         {
             Konekcija konekcija = new Konekcija();
-            List<Student> studenti = konekcija.GetStudentiByGodinaStudija(1);
+            List<_Student> studenti = konekcija.GetStudentiByGodinaStudija(1);
             foreach (var student in studenti)
             {
                 Console.WriteLine(student);
@@ -27,7 +27,7 @@ namespace DLWMS.ConsoleApp.Predavanja.P1
 
         private static void NovaVerzijaMetode()
         {
-            Student denis = new Student(220022, "Denis", "Music");
+            _Student denis = new _Student(220022, "Denis", "Music");
             Console.WriteLine(denis);
             Console.WriteLine(denis.ToString());
 
@@ -36,7 +36,7 @@ namespace DLWMS.ConsoleApp.Predavanja.P1
         private static void BazniTip()
         {
             int indeks2 = 222000;
-            Student denis = new Student(220022, "Denis", "Music");
+            _Student denis = new _Student(220022, "Denis", "Music");
 
             object objIndeks = indeks2;
             object objStudent = denis;
@@ -56,8 +56,8 @@ namespace DLWMS.ConsoleApp.Predavanja.P1
             int indeks2 = indeks1;
             indeks1 = 222000;
 
-            Student denis = new Student(220022, "Denis", "Music");
-            Student student = denis;
+            _Student denis = new _Student(220022, "Denis", "Music");
+            _Student student = denis;
             student.Prezime = "STUDENT";
 
 
@@ -65,14 +65,14 @@ namespace DLWMS.ConsoleApp.Predavanja.P1
 
         private static void Klase()
         {
-            Student denis = new Student(220022, "Denis", "Music");
+            _Student denis = new _Student(220022, "Denis", "Music");
             Console.WriteLine(denis.GetIndeks());
             denis.SetIndeks(220033);
             Console.WriteLine(denis.GetIndeks());
             denis.Prezime = "TEST";
 
-            Student zanin = new Student(indeks: 220023, prezime: "Vejzovic", ime: "Zanin");
-            Student jasmin = new Student()
+            _Student zanin = new _Student(indeks: 220023, prezime: "Vejzovic", ime: "Zanin");
+            _Student jasmin = new _Student()
             {
                 Prezime = "Azemovic",
                 GodinaStudija = 1

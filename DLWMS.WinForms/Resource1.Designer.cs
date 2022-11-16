@@ -104,5 +104,23 @@ namespace DLWMS.WinForms {
                 return ResourceManager.GetString("PodaciNisuValidni", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Podaci uspješno dodati u bazu.
+        /// </summary>
+        public static string PodaciUspjesnoDodati {
+            get {
+                return ResourceManager.GetString("PodaciUspjesnoDodati", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Podaci uspjenso modifikovani.
+        /// </summary>
+        public static string PodaciUspjesnoModifikovani {
+            get {
+                return ResourceManager.GetString("PodaciUspjesnoModifikovani", resourceCulture);
+            }
+        }
     }
 }

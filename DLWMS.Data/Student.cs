@@ -1,6 +1,34 @@
-﻿namespace DLWMS.Data
+﻿using System.Drawing;
+
+namespace DLWMS.Data
 {
+
     public class Student
+    {
+        public int Id { get; set; }
+        public string Ime { get; set; }
+        public string Prezime { get; set; }
+        public string BrojIndeksa { get; set; }
+        public string Lozinka { get; set; }
+        public string Email { get; set; }
+        public DateTime DatumRodjenja { get; set; }
+        public int GodinaStudija { get; set; }
+        public Image Slika { get; set; }//byte[]
+        public bool Aktivan { get; set; }
+
+        public override string ToString()
+        {
+            return $"({BrojIndeksa}) - {Ime} {Prezime}";
+        }
+    }
+
+
+
+
+
+
+
+    public class _Student
     {
         string _ime;
 
@@ -12,8 +40,8 @@
 
         public int? MentorId { get; set; }
 
-        public Student() { }
-        public Student(int indeks, string ime, string prezime)
+        public _Student() { }
+        public _Student(int indeks, string ime, string prezime)
         {
             _indeks = indeks;
             _ime = ime;
@@ -56,9 +84,9 @@
     {
         public string NazivIspita { get; set; }
         public DateTime DatumIspita { get; set; }
-        private Student[] Prijavljeni { get; set; } = new Student[100];
+        private _Student[] Prijavljeni { get; set; } = new _Student[100];
         private int brojPrijavljenih = 0;
-        public bool DodajStudenta(Student student) {
+        public bool DodajStudenta(_Student student) {
             Prijavljeni[brojPrijavljenih] = student;
             return true;
         }
@@ -76,7 +104,7 @@
     }
     public class Konekcija
     {
-        public Student GetStudentByIndeks(string indeks)
+        public _Student GetStudentByIndeks(string indeks)
         {
             //return new Student()
             //{
@@ -87,13 +115,13 @@
             return null;
         }
 
-        public List<Student> GetStudentiByGodinaStudija(int godinaStudija)
+        public List<_Student> GetStudentiByGodinaStudija(int godinaStudija)
         {
-            return new List<Student>()
+            return new List<_Student>()
             {
-                new Student(){Prezime = "Prezime1", GodinaStudija = godinaStudija},
-                new Student(){Prezime = "Prezime2", GodinaStudija = godinaStudija},
-                new Student(){Prezime = "Prezime3", GodinaStudija = godinaStudija},
+                new _Student(){Prezime = "Prezime1", GodinaStudija = godinaStudija},
+                new _Student(){Prezime = "Prezime2", GodinaStudija = godinaStudija},
+                new _Student(){Prezime = "Prezime3", GodinaStudija = godinaStudija},
 
             };
         }

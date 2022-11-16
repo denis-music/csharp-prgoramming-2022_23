@@ -19,7 +19,7 @@ namespace DLWMS.ConsoleApp.Predavanja.P2
 
         private static void Indekseri()
         {
-            var obj = new Student()
+            var obj = new _Student()
             {
                 GodinaStudija = 1,
                 MentorId = null,
@@ -56,7 +56,7 @@ namespace DLWMS.ConsoleApp.Predavanja.P2
         
         private static void Dekonstrukcija()
         {
-            var obj = new Student()
+            var obj = new _Student()
             {
                 GodinaStudija = 1,
                 MentorId = null,
@@ -91,7 +91,7 @@ namespace DLWMS.ConsoleApp.Predavanja.P2
 
         private static void SlanjeParametara()
         {
-            Student student = null ;
+            _Student student = null ;
             InicijalizujStudenta(in student);
             Console.WriteLine(student.Prezime);
 
@@ -100,7 +100,7 @@ namespace DLWMS.ConsoleApp.Predavanja.P2
                 Console.WriteLine(rezultat);
         }
 
-        private static void InicijalizujStudenta(in Student obj)
+        private static void InicijalizujStudenta(in _Student obj)
         {
             //obj = new Student()
             //{
@@ -114,7 +114,7 @@ namespace DLWMS.ConsoleApp.Predavanja.P2
         private static void ProvjeraNullVrijednosti()
         {
             Konekcija konekcija = new Konekcija();
-            Student student = konekcija.GetStudentByIndeks("IB210012");
+            _Student student = konekcija.GetStudentByIndeks("IB210012");
             //uslov ? ispunjen : nije_ispunjen
             string prezime = student?.Prezime ?? "PREZIME";
 
@@ -133,7 +133,7 @@ namespace DLWMS.ConsoleApp.Predavanja.P2
                 Console.WriteLine(test.Value);
 
 
-            Student marko = new Student() { Prezime= "Nišić", MentorId = null};
+            _Student marko = new _Student() { Prezime= "Nišić", MentorId = null};
             marko = null;
         }
 
@@ -146,10 +146,10 @@ namespace DLWMS.ConsoleApp.Predavanja.P2
                 dlStudenti[i].Prezime = $"Prezime{i}";
                 dlStudenti[i].GodinaStudija = i + 1;
             }
-            Student[] studenti = new Student[3];
+            _Student[] studenti = new _Student[3];
             for (int i = 0; i < studenti.Length; i++)
             {
-                studenti[i] = new Student();
+                studenti[i] = new _Student();
                 studenti[i].Prezime = $"Prezime{i}";
                 studenti[i].GodinaStudija = i + 1;
             }
@@ -162,10 +162,10 @@ namespace DLWMS.ConsoleApp.Predavanja.P2
 
             b = 20;
 
-            Student   student1   = new Student()   { Prezime = "Music", GodinaStudija = 1 };
+            _Student   student1   = new _Student()   { Prezime = "Music", GodinaStudija = 1 };
             DLStudent dlStudent1 = new DLStudent() { Prezime = "Music", GodinaStudija = 1 };
             
-            Student student2 = student1;
+            _Student student2 = student1;
             Console.WriteLine(student1);
             Console.WriteLine(student2);
             student2.Prezime = "Modifikacija prezimena";

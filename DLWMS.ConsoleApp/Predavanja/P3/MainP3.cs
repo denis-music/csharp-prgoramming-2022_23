@@ -30,7 +30,7 @@ namespace DLWMS.ConsoleApp.Predavanja.P3
         private static void Repository()
         {
             StudentRepository studentDB = new StudentRepository();
-            Student denis = new Student() { GodinaStudija = 1, MentorId = null, Prezime = "Music" };
+            _Student denis = new _Student() { GodinaStudija = 1, MentorId = null, Prezime = "Music" };
             studentDB.Save(denis);
             var studentId2 = studentDB.GetById(2);
 

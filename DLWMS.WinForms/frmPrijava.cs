@@ -1,13 +1,11 @@
 ﻿using DLWMS.Data;
-
+using DLWMS.WinForms.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Reflection;
-using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -70,52 +68,6 @@ namespace DLWMS.WinForms
         {
             new frmRegistracija().Show();
         }
-    }
-
-
-    public class DLWMSApp
-    {
-        public static Korisnik Korisnik;
-    }
-
-    public class Validator
-    {
-        public static bool ValidirajKontrolu(TextBox textBox, ErrorProvider err, string kljuc)
-        {
-            if (string.IsNullOrWhiteSpace(textBox.Text))
-            {
-                err.SetError(textBox, Resursi.Get(kljuc));
-                return false;
-            }
-            err.Clear();
-            return true;
-        }
-    }
-
-    public class Resursi
-    {
-        private static ResourceManager Menadzer = new ResourceManager(Kljucevi.NazivResourceFajla, Assembly.GetExecutingAssembly());
-        
-        public static string Get(string kljuc)
-        {
-            return Menadzer.GetString(kljuc);
-        }
-
-    }
-
-    public class Kljucevi
-    {
-        public const string NazivResourceFajla = "DLWMS.WinForms.Resource1";
-        public const string DobroDosli = "DobroDosli";
-        public const string NalogNijeAktivan = "NalogNijeAktivan";
-        public const string PodaciNisuValidni = "PodaciNisuValidni";
-        public const string Informacija = "Informacija";
-        public const string ObaveznaVrijednost = "ObaveznaVrijednost";
-
-
-
-
-
     }
 
 }
