@@ -15,7 +15,7 @@ namespace DLWMS.WinForms.Studenti
     public partial class frmStudentiPretraga : Form
     {
         public frmStudentiPretraga()
-        {            
+        {
             InitializeComponent();
             dgvStudenti.AutoGenerateColumns = false;
         }
@@ -41,7 +41,7 @@ namespace DLWMS.WinForms.Studenti
 
         private void dgvStudenti_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            var odabraniStudent = dgvStudenti.SelectedRows[0].DataBoundItem as Student;           
+            var odabraniStudent = dgvStudenti.SelectedRows[0].DataBoundItem as Student;
 
             if (odabraniStudent != null)
             {
@@ -55,19 +55,47 @@ namespace DLWMS.WinForms.Studenti
             }
         }
 
+        //private void txtPretraga_TextChanged(object sender, EventArgs e)
+        //{
+        //    var pretraga = txtPretraga.Text.ToLower();
+        //    var rezultat = new List<Student>();
+
+        //    foreach (var student in InMemoryDB.Studenti)
+        //    {
+        //        if (student.Ime.ToLower().Contains(pretraga) || student.Prezime.ToLower().Contains(pretraga)
+        //            || student.BrojIndeksa.ToLower().Contains(pretraga))
+        //            rezultat.Add(student);
+        //    }
+        //    UcitajStudente(rezultat);
+
+        //}
         private void txtPretraga_TextChanged(object sender, EventArgs e)
         {
+            //var pretraga = txtPretraga.Text.ToLower();
+            //var rezGodine3 = godineStudija.Where(godina => godina.Aktivna == true);
+            //ver3 
+            UcitajStudente(InMemoryDB.Studenti.Where(FiltrirajStudente).ToList());
+
+
+            //ver2
+            //var rezultat = InMemoryDB.Studenti.Where(FiltrirajStudente).ToList(); 
+
+            //ver1
+            //var rezultat = InMemoryDB.Studenti.Where(student => 
+            //            student.Ime.ToLower().Contains(pretraga) ||
+            //            student.Prezime.ToLower().Contains(pretraga) || 
+            //            student.BrojIndeksa.ToLower().Contains(pretraga)).ToList();
+
+            //UcitajStudente(rezultat);
+
+        }
+
+        private bool FiltrirajStudente(Student student)
+        {
             var pretraga = txtPretraga.Text.ToLower();
-            var rezultat = new List<Student>();
-
-            foreach (var student in InMemoryDB.Studenti)
-            {
-                if(student.Ime.ToLower().Contains(pretraga) || student.Prezime.ToLower().Contains(pretraga)
-                    || student.BrojIndeksa.ToLower().Contains(pretraga))
-                rezultat.Add(student);
-            }
-            UcitajStudente(rezultat);
-
+            return student.Ime.ToLower().Contains(pretraga) ||
+                        student.Prezime.ToLower().Contains(pretraga) ||
+                        student.BrojIndeksa.ToLower().Contains(pretraga);
+        }
     }
-}
 }
