@@ -162,6 +162,15 @@ namespace DLWMS.WinForms.Intro
 
     public static class DodateMetode
     {
+
+        public static void LoadData<T>(this ComboBox comboBox, List<T> dataSource,
+           string displayMember = "Naziv", string valueMember = "Id")
+        {
+            comboBox.DataSource = dataSource;
+            comboBox.DisplayMember = displayMember;
+            comboBox.ValueMember = valueMember;
+        }
+
         public static string ToBiHFormat(this DateTime obj)
         {
             return $"BIH FORMAT :) -> {obj.ToString("dd.MM.yyyy hh:mm:ss")}";

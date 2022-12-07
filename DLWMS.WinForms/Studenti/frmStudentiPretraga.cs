@@ -43,10 +43,18 @@ namespace DLWMS.WinForms.Studenti
         {
             var odabraniStudent = dgvStudenti.SelectedRows[0].DataBoundItem as Student;
 
+            //Text = $"Red:{e.RowIndex} Kolona:{e.ColumnIndex}";
+
+            Form forma = null;
+
             if (odabraniStudent != null)
             {
-                var frmStudent = new frmStudentiNovi(odabraniStudent);
-                frmStudent.ShowDialog();
+                if (dgvStudenti.CurrentCell is DataGridViewButtonCell)
+                    forma = new frmStudentiPredmeti(odabraniStudent);
+                else
+                    forma = new frmStudentiNovi(odabraniStudent);               
+
+                forma.ShowDialog();
                 UcitajStudente();
 
                 //var modifikujStudenta = new frmStudentiNovi();

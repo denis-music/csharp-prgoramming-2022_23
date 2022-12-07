@@ -1,5 +1,6 @@
 ﻿using DLWMS.Data;
 using DLWMS.WinForms.Helpers;
+using DLWMS.WinForms.Intro;
 
 using System;
 using System.Collections.Generic;
@@ -38,6 +39,7 @@ namespace DLWMS.WinForms.Studenti
                 student.Prezime = txtPrezime.Text;
                 student.Slika = pbSlikaStudenta.Image;
                 student.Lozinka = txtLozinka.Text;
+                student.Spol = cmbSpol.SelectedItem as Spol;
 
 
                 var poruka = Kljucevi.PodaciUspjesnoModifikovani;
@@ -73,10 +75,35 @@ namespace DLWMS.WinForms.Studenti
         private void frmStudentiNovi_Load(object sender, EventArgs e)
         {
             UcitajGodineStudija();
+            UcitajSpolove();
             if (student.Id == 0)
                 NoviStudent();
             else
                 UcitajPodatkeOStudentu();
+        }
+
+        private void UcitajSpolove()
+        {
+            cmbSpol.LoadData(InMemoryDB.Spolovi);
+            
+           //DataLoader.ToComboBox(cmbSpol, InMemoryDB.Spolovi);
+
+           //cmbSpol.DataSource = InMemoryDB.Spolovi;
+           //cmbSpol.DisplayMember = "Naziv";
+           //cmbSpol.ValueMember = "Id";
+        }
+
+        private void UcitajGodineStudija()
+        {
+
+            cmbGodinaStudija.LoadData(InMemoryDB.GodineStudija);
+
+            //DataLoader.ToComboBox(cmbGodinaStudija, InMemoryDB.GodineStudija, "Oznaka");
+
+            //cmbGodinaStudija.DataSource = InMemoryDB.GodineStudija;
+            //cmbGodinaStudija.DisplayMember = "Oznaka";
+            //cmbGodinaStudija.ValueMember = "Id";
+
         }
 
         private void UcitajPodatkeOStudentu()
@@ -90,6 +117,8 @@ namespace DLWMS.WinForms.Studenti
             txtPrezime.Text = student.Prezime;
             pbSlikaStudenta.Image = student.Slika;
             txtLozinka.Text = student.Lozinka;
+            cmbSpol.SelectedItem  = student.Spol;
+
         }
         private void NoviStudent()
         {
@@ -119,13 +148,7 @@ namespace DLWMS.WinForms.Studenti
         }
 
 
-        private void UcitajGodineStudija()
-        {
-            cmbGodinaStudija.DataSource = InMemoryDB.GodineStudija;
-            cmbGodinaStudija.DisplayMember = "Oznaka";
-            cmbGodinaStudija.ValueMember = "Id";
-
-        }
+       
 
         private void txtIme_TextChanged(object sender, EventArgs e)
         {
@@ -143,4 +166,17 @@ namespace DLWMS.WinForms.Studenti
                 pbSlikaStudenta.Image = Image.FromFile(openFileDialog1.FileName);
         }
     }
+
+    public class DataLoader
+    {
+        public static void ToComboBox<T>(ComboBox comboBox, List<T> dataSource,
+            string displayMember ="Naziv", string valueMember = "Id")
+        {
+            comboBox.DataSource = dataSource;
+            comboBox.DisplayMember = displayMember;
+            comboBox.ValueMember = valueMember;
+        }
+
+    }
+
 }

@@ -1,4 +1,6 @@
 ﻿using System.Drawing;
+using System.Reflection.Emit;
+using System.Reflection.Metadata.Ecma335;
 
 namespace DLWMS.Data
 {
@@ -15,19 +17,24 @@ namespace DLWMS.Data
         public int GodinaStudija { get; set; }
         public Image Slika { get; set; }//byte[]
         public bool Aktivan { get; set; }
+        //public int SpolId { get; set; }
+        public Spol Spol { get; set; }
+
+        public List<PolozeniPredmet> PolozeniPredmeti { get; set; }
+
+        public Student()
+        {
+            PolozeniPredmeti = new List<PolozeniPredmet>();
+        }
 
         public override string ToString()
         {
             return $"({BrojIndeksa}) - {Ime} {Prezime}";
         }
     }
-
-
-
-
-
-
-
+    /// <summary>
+    /// Klase korištene za demo pojedinih koncepata OOP-a
+    /// </summary>
     public class _Student
     {
         string _ime;

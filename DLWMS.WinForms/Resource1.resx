@@ -138,4 +138,7 @@
   <data name="PodaciUspjesnoModifikovani" xml:space="preserve">
     <value>Podaci uspjenso modifikovani</value>
   </data>
+  <data name="PodatakVecPostoji" xml:space="preserve">
+    <value>Podatak {0} je već dodat</value>
+  </data>
 </root>
