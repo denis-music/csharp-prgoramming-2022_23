@@ -2,6 +2,8 @@
 using DLWMS.WinForms.Helpers;
 using DLWMS.WinForms.Intro;
 
+using Microsoft.EntityFrameworkCore;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,7 +19,7 @@ namespace DLWMS.WinForms.Studenti
     public partial class frmStudentiNovi : Form
     {
         private Student student;
-
+        DLWMSDbContext db = new DLWMSDbContext();
 
         public frmStudentiNovi(Student odabraniStudent = null)
         {
@@ -37,19 +39,22 @@ namespace DLWMS.WinForms.Studenti
                 student.GodinaStudija = (int)cmbGodinaStudija.SelectedValue;
                 student.Ime = txtIme.Text;
                 student.Prezime = txtPrezime.Text;
-                student.Slika = pbSlikaStudenta.Image;
+                student.Slika = ImageHelper.FromImageToByte(pbSlikaStudenta.Image);
                 student.Lozinka = txtLozinka.Text;
                 student.Spol = cmbSpol.SelectedItem as Spol;
-
 
                 var poruka = Kljucevi.PodaciUspjesnoModifikovani;
 
                 if (student.Id == 0)
                 {
-                    student.Id = InMemoryDB.Studenti.Count + 1;
+                    //student.Id = InMemoryDB.Studenti.Count + 1;
                     poruka = Kljucevi.PodaciUspjesnoDodati;
-                    InMemoryDB.Studenti.Add(student);
-                }
+                    //InMemoryDB.Studenti.Add(student);
+                    db.Studenti.Add(student);
+                }else
+                    db.Entry(student).State = EntityState.Modified;
+
+                db.SaveChanges();
 
                 MessageBox.Show($"{Resursi.Get(poruka)} {student}",
                                   Resursi.Get(Kljucevi.Informacija),
@@ -115,7 +120,7 @@ namespace DLWMS.WinForms.Studenti
             cmbGodinaStudija.SelectedValue = student.GodinaStudija;
             txtIme.Text = student.Ime;
             txtPrezime.Text = student.Prezime;
-            pbSlikaStudenta.Image = student.Slika;
+            pbSlikaStudenta.Image = ImageHelper.FromByteToImage(student.Slika);
             txtLozinka.Text = student.Lozinka;
             cmbSpol.SelectedItem  = student.Spol;
 
@@ -139,7 +144,7 @@ namespace DLWMS.WinForms.Studenti
 
         private void GenerisiBrojIndeksa()
         {                           //IB (21) * 10000 + 3
-            txtBrojIndeksa.Text = $"IB{(DateTime.Now.Year - 2000) * 10000 + InMemoryDB.Studenti.Count + 1}";
+            txtBrojIndeksa.Text = $"IB{(DateTime.Now.Year - 2000) * 10000 + db.Studenti.Count() + 1}";
         }
 
         private void GenerisiPodatke()

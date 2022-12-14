@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Drawing;
 using System.Reflection.Emit;
 using System.Reflection.Metadata.Ecma335;
 
@@ -15,9 +16,10 @@ namespace DLWMS.Data
         public string Email { get; set; }
         public DateTime DatumRodjenja { get; set; }
         public int GodinaStudija { get; set; }
-        public Image Slika { get; set; }//byte[]
+        public byte[] Slika { get; set; }//byte[]
         public bool Aktivan { get; set; }
         //public int SpolId { get; set; }
+        [NotMapped]
         public Spol Spol { get; set; }
 
         public List<PolozeniPredmet> PolozeniPredmeti { get; set; }

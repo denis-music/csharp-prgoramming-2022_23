@@ -14,6 +14,10 @@ namespace DLWMS.WinForms.Studenti
 {
     public partial class frmStudentiPretraga : Form
     {
+
+        DLWMSDbContext db = new DLWMSDbContext();
+
+
         public frmStudentiPretraga()
         {
             InitializeComponent();
@@ -28,7 +32,7 @@ namespace DLWMS.WinForms.Studenti
         private void UcitajStudente(List<Student> studenti = null)
         {
             dgvStudenti.DataSource = null;
-            dgvStudenti.DataSource = studenti ?? InMemoryDB.Studenti;
+            dgvStudenti.DataSource = studenti ?? db.Studenti.ToList(); //InMemoryDB.Studenti;
         }
 
         private void btnDodajStudenta_Click(object sender, EventArgs e)
@@ -79,10 +83,15 @@ namespace DLWMS.WinForms.Studenti
         //}
         private void txtPretraga_TextChanged(object sender, EventArgs e)
         {
+            //ver4
+            //UcitajStudente(InMemoryDB.Studenti.Where(FiltrirajStudente).ToList());
+            UcitajStudente(db.Studenti.Where(FiltrirajStudente).ToList());
+
+
             //var pretraga = txtPretraga.Text.ToLower();
             //var rezGodine3 = godineStudija.Where(godina => godina.Aktivna == true);
             //ver3 
-            UcitajStudente(InMemoryDB.Studenti.Where(FiltrirajStudente).ToList());
+            //UcitajStudente(InMemoryDB.Studenti.Where(FiltrirajStudente).ToList());
 
 
             //ver2
