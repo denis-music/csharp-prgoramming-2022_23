@@ -20,6 +20,7 @@ namespace DLWMS.WinForms.Studenti
     {
         private Student odabraniStudent;
 
+        DLWMSDbContext db = new DLWMSDbContext();
 
         public frmStudentiPredmeti(Student odabraniStudent)
         {
@@ -38,7 +39,8 @@ namespace DLWMS.WinForms.Studenti
 
         private void UcitajPredmete()
         {
-            cmbPredmet.LoadData(InMemoryDB.Predmeti);
+            cmbPredmet.LoadData(db.Predmeti.ToList());
+            //cmbPredmet.LoadData(InMemoryDB.Predmeti);
         }
 
         private void UcitajPodatkeOStudentu()
@@ -52,7 +54,8 @@ namespace DLWMS.WinForms.Studenti
         {
 
             var binding = new BindingSource();
-            binding.DataSource = odabraniStudent.PolozeniPredmeti;
+            binding.DataSource = db.StudentiPredmeti.Where(
+                polozeni => polozeni.StudentId == odabraniStudent.Id).ToList(); //odabraniStudent.PolozeniPredmeti;
             //dgvPolozeniPredmeti.DataSource = null;
             dgvPolozeniPredmeti.DataSource = binding;
             //dgvPolozeniPredmeti.DataSource = odabraniStudent.PolozeniPredmeti;
@@ -78,23 +81,28 @@ namespace DLWMS.WinForms.Studenti
                     return;
                 }
 
-                var polozeni = new PolozeniPredmet()
+                var polozeni = new StudentPredmet()
                 {
-                    Id = odabraniStudent.PolozeniPredmeti.Count() + 1,
+                  //  Id = odabraniStudent.PolozeniPredmeti.Count() + 1,
                     Datum    = dtpDatumPolaganja.Value,
                     Ocjena = int.Parse(cmbOcjene.Text),
-                    Predmet = predmet
+                    PredmetId = predmet.Id,
+                    StudentId = odabraniStudent.Id
                 };
-                odabraniStudent.PolozeniPredmeti.Add(polozeni);
+                //  odabraniStudent.PolozeniPredmeti.Add(polozeni);
+                db.StudentiPredmeti.Add(polozeni);
+                db.SaveChanges();
+
                 UcitajPolozenePredmete();
             }
         }
 
         private bool PredmetVecDodat()
         {
-            var odabraniPredmet = cmbPredmet.SelectedItem as Predmet;
-            return odabraniStudent.PolozeniPredmeti.Where( 
-                polozeni => polozeni.Predmet.Id == odabraniPredmet.Id
+            var odabraniPredmet = cmbPredmet.SelectedItem as Predmet;//1 Programiranje I
+            return db.StudentiPredmeti.Where( 
+                polozeni => polozeni.PredmetId == odabraniPredmet.Id
+                && polozeni.StudentId == odabraniStudent.Id
                 ).Count() > 0;
 
         }

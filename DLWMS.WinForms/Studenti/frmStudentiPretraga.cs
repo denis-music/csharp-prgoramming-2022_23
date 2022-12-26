@@ -1,5 +1,7 @@
 ﻿using DLWMS.Data;
 
+using Microsoft.EntityFrameworkCore;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -32,7 +34,7 @@ namespace DLWMS.WinForms.Studenti
         private void UcitajStudente(List<Student> studenti = null)
         {
             dgvStudenti.DataSource = null;
-            dgvStudenti.DataSource = studenti ?? db.Studenti.ToList(); //InMemoryDB.Studenti;
+            dgvStudenti.DataSource = studenti ?? db.Studenti.Include(s=>s.Spol).ToList(); //InMemoryDB.Studenti;
         }
 
         private void btnDodajStudenta_Click(object sender, EventArgs e)

@@ -25,9 +25,21 @@ namespace DLWMS.Data
         {
             optionsBuilder.UseSqlite(dbPutanja);
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Student>()
+                .HasMany(student => student.Uloga)
+                .WithMany(uloga => uloga.Student)
+                .UsingEntity(medjuTabela => medjuTabela.ToTable("StudentiUloge"));
+        }
 
         public DbSet<Predmet> Predmeti { get; set; }
         public DbSet<Student> Studenti { get; set; }
+        public DbSet<Spol> Spolovi { get; set; }
+        public DbSet<Uloga> Uloge { get; set; }
+
+        public DbSet<StudentPredmet> StudentiPredmeti{ get; set; }
+
 
 
     }

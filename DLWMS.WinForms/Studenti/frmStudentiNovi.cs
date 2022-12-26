@@ -25,6 +25,7 @@ namespace DLWMS.WinForms.Studenti
         {
             InitializeComponent();
             student = odabraniStudent ?? new Student();
+            dgvUloge.AutoGenerateColumns = false;
         }
 
         private void btnSacuvaj_Click(object sender, EventArgs e)
@@ -81,21 +82,30 @@ namespace DLWMS.WinForms.Studenti
         {
             UcitajGodineStudija();
             UcitajSpolove();
+            UcitajUloge();
             if (student.Id == 0)
                 NoviStudent();
             else
                 UcitajPodatkeOStudentu();
         }
 
+        private void UcitajUloge()
+        {
+            cmbUloge.LoadData(db.Uloge.ToList());
+        }
+
         private void UcitajSpolove()
         {
-            cmbSpol.LoadData(InMemoryDB.Spolovi);
-            
-           //DataLoader.ToComboBox(cmbSpol, InMemoryDB.Spolovi);
 
-           //cmbSpol.DataSource = InMemoryDB.Spolovi;
-           //cmbSpol.DisplayMember = "Naziv";
-           //cmbSpol.ValueMember = "Id";
+            cmbSpol.LoadData(db.Spolovi.ToList());
+
+            //cmbSpol.LoadData(InMemoryDB.Spolovi);
+
+            //DataLoader.ToComboBox(cmbSpol, InMemoryDB.Spolovi);
+
+            //cmbSpol.DataSource = InMemoryDB.Spolovi;
+            //cmbSpol.DisplayMember = "Naziv";
+            //cmbSpol.ValueMember = "Id";
         }
 
         private void UcitajGodineStudija()
@@ -122,9 +132,17 @@ namespace DLWMS.WinForms.Studenti
             txtPrezime.Text = student.Prezime;
             pbSlikaStudenta.Image = ImageHelper.FromByteToImage(student.Slika);
             txtLozinka.Text = student.Lozinka;
-            cmbSpol.SelectedItem  = student.Spol;
+            cmbSpol.SelectedValue  = student.Spol?.Id;
+            UcitajUlogeStudenta();
 
         }
+
+        private void UcitajUlogeStudenta()
+        {
+            dgvUloge.DataSource = null;
+            dgvUloge.DataSource = student.Uloga.ToList();
+        }
+
         private void NoviStudent()
         {
             GenerisiBrojIndeksa();
@@ -169,6 +187,13 @@ namespace DLWMS.WinForms.Studenti
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 pbSlikaStudenta.Image = Image.FromFile(openFileDialog1.FileName);
+        }
+
+        private void btnDodajUlogu_Click(object sender, EventArgs e)
+        {
+            var odabranaUloga = cmbUloge.SelectedItem as Uloga;
+            student.Uloga.Add(odabranaUloga);
+            UcitajUlogeStudenta();
         }
     }
 
