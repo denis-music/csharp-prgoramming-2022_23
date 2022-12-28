@@ -1,6 +1,7 @@
 ﻿using DLWMS.Data;
 using DLWMS.WinForms.Helpers;
 using DLWMS.WinForms.Intro;
+using DLWMS.WinForms.Izvjestaji;
 
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace DLWMS.WinForms.Studenti
 {
     public partial class frmStudentiPredmeti : Form
     {
-        private Student odabraniStudent;
+        private Student student;
 
         DLWMSDbContext db = new DLWMSDbContext();
 
@@ -26,7 +27,7 @@ namespace DLWMS.WinForms.Studenti
         {
             InitializeComponent();
             dgvPolozeniPredmeti.AutoGenerateColumns = false;
-            this.odabraniStudent = odabraniStudent;
+            this.student = odabraniStudent;
         }
 
         private void frmStudentiPredmeti_Load(object sender, EventArgs e)
@@ -45,29 +46,25 @@ namespace DLWMS.WinForms.Studenti
 
         private void UcitajPodatkeOStudentu()
         {
-            pbSlika.Image = ImageHelper.FromByteToImage(odabraniStudent.Slika);
-            lblImePrezime.Text = $"{odabraniStudent.Ime} {odabraniStudent.Prezime}";
-            lblIndeks.Text = odabraniStudent.BrojIndeksa;
+            pbSlika.Image = ImageHelper.FromByteToImage(student.Slika);
+            lblImePrezime.Text = $"{student.Ime} {student.Prezime}";
+            lblIndeks.Text = student.BrojIndeksa;
         }
 
         private void UcitajPolozenePredmete()
         {
+            //Polozeni = (dgvPolozeniPredmeti.DataSource as BindingSource).DataSource as List<StudentPredmet>
 
             var binding = new BindingSource();
             binding.DataSource = db.StudentiPredmeti.Where(
-                polozeni => polozeni.StudentId == odabraniStudent.Id).ToList(); //odabraniStudent.PolozeniPredmeti;
+                polozeni => polozeni.StudentId == student.Id).ToList(); //odabraniStudent.PolozeniPredmeti;
             //dgvPolozeniPredmeti.DataSource = null;
             dgvPolozeniPredmeti.DataSource = binding;
             //dgvPolozeniPredmeti.DataSource = odabraniStudent.PolozeniPredmeti;
-
-
         }
 
         private void btnDodaj_Click(object sender, EventArgs e)
         {
-
-           
-
             if (ValidanUnos())
             {
 
@@ -87,7 +84,7 @@ namespace DLWMS.WinForms.Studenti
                     Datum    = dtpDatumPolaganja.Value,
                     Ocjena = int.Parse(cmbOcjene.Text),
                     PredmetId = predmet.Id,
-                    StudentId = odabraniStudent.Id
+                    StudentId = student.Id
                 };
                 //  odabraniStudent.PolozeniPredmeti.Add(polozeni);
                 db.StudentiPredmeti.Add(polozeni);
@@ -102,7 +99,7 @@ namespace DLWMS.WinForms.Studenti
             var odabraniPredmet = cmbPredmet.SelectedItem as Predmet;//1 Programiranje I
             return db.StudentiPredmeti.Where( 
                 polozeni => polozeni.PredmetId == odabraniPredmet.Id
-                && polozeni.StudentId == odabraniStudent.Id
+                && polozeni.StudentId == student.Id
                 ).Count() > 0;
 
         }
@@ -112,5 +109,33 @@ namespace DLWMS.WinForms.Studenti
             return      Validator.ValidirajKontrolu(cmbPredmet, err, Kljucevi.ObaveznaVrijednost)
                  &&     Validator.ValidirajKontrolu(cmbOcjene, err, Kljucevi.ObaveznaVrijednost);
         }
+
+        private void btnPrintaj_Click(object sender, EventArgs e)
+        {
+            var podaciZaPrint = new dtoUvjerenjOPolozenim()
+            {
+                BrojIndeksa = student.BrojIndeksa,
+                ImePrezime = $"{student.Ime} {student.Prezime}",
+                Status  = "REDOVAN",
+                AkademskaGodina = "2022/2023",
+                Polozeni = (dgvPolozeniPredmeti.DataSource as BindingSource).DataSource as List<StudentPredmet>
+            };
+
+            var frmIzvjestaji = new frmIzvjestaji(podaciZaPrint);
+            frmIzvjestaji.ShowDialog();
+
+        }
     }
+
+    public class dtoUvjerenjOPolozenim
+    {
+        public string BrojIndeksa { get; set; }
+        public string ImePrezime { get; set; }
+        public string Status { get; set; }
+        public string AkademskaGodina{ get; set; }
+
+        public List<StudentPredmet> Polozeni { get; set; }
+    }
+
+
 }

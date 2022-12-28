@@ -16,5 +16,17 @@ namespace DLWMS.WinForms
         {
             InitializeComponent();
         }
+
+        private void studentiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var studentiPretraga = new Studenti.frmStudentiPretraga();
+            studentiPretraga.MdiParent = this;
+            studentiPretraga.Show();
+        }
+
+        private void krajRadaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

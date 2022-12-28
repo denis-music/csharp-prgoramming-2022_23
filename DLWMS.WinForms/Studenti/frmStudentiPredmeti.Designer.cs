@@ -42,6 +42,7 @@
             this.dtpDatumPolaganja = new System.Windows.Forms.DateTimePicker();
             this.btnDodaj = new System.Windows.Forms.Button();
             this.err = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnPrintaj = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPolozeniPredmeti)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSlika)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.err)).BeginInit();
@@ -168,11 +169,22 @@
             // 
             this.err.ContainerControl = this;
             // 
+            // btnPrintaj
+            // 
+            this.btnPrintaj.Location = new System.Drawing.Point(468, 331);
+            this.btnPrintaj.Name = "btnPrintaj";
+            this.btnPrintaj.Size = new System.Drawing.Size(105, 23);
+            this.btnPrintaj.TabIndex = 8;
+            this.btnPrintaj.Text = "Printaj uvjerenje";
+            this.btnPrintaj.UseVisualStyleBackColor = true;
+            this.btnPrintaj.Click += new System.EventHandler(this.btnPrintaj_Click);
+            // 
             // frmStudentiPredmeti
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(585, 337);
+            this.ClientSize = new System.Drawing.Size(585, 363);
+            this.Controls.Add(this.btnPrintaj);
             this.Controls.Add(this.btnDodaj);
             this.Controls.Add(this.dtpDatumPolaganja);
             this.Controls.Add(this.cmbOcjene);
@@ -208,5 +220,6 @@
         private DataGridViewTextBoxColumn Datum;
         private DataGridViewTextBoxColumn Ocjena;
         private DataGridViewButtonColumn Obrisi;
+        private Button btnPrintaj;
     }
 }

@@ -9,6 +9,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Izvjestaji\rptUvjerenje.rdlc" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Izvjestaji\rptUvjerenje.rdlc" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ReportViewerCore.WinForms" Version="15.1.17" />
     <PackageReference Include="System.Resources.ResourceManager" Version="4.3.0" />
   </ItemGroup>
 
@@ -17,6 +26,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Izvjestaji\dsDLWMS.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>dsDLWMS.xsd</DependentUpon>
+    </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -43,6 +57,10 @@
   <ItemGroup>
     <None Update="DLWMS.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Izvjestaji\dsDLWMS.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsDLWMS.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
 

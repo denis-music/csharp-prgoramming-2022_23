@@ -173,7 +173,7 @@ namespace DLWMS.WinForms.Intro
 
         public static string ToBiHFormat(this DateTime obj)
         {
-            return $"BIH FORMAT :) -> {obj.ToString("dd.MM.yyyy hh:mm:ss")}";
+            return $"{obj.ToString("dd.MM.yyyy hh:mm:ss")}";
         }
 
 
