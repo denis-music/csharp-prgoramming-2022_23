@@ -11,7 +11,7 @@ namespace DLWMS.WinForms
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            var startnaForma = new Asinhrono.frmPing(); //new frmGlavna(); //Studenti.frmStudentiPretraga();//new Predmeti.frmPredmeti(); 
+            var startnaForma = new frmPrijava(); //Studenti.frmStudentiPretraga();//new Predmeti.frmPredmeti(); 
             Application.Run(startnaForma);
         }
     }

@@ -1,5 +1,6 @@
 ﻿using DLWMS.Data;
 using DLWMS.WinForms.Helpers;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,38 +21,44 @@ namespace DLWMS.WinForms
         }
 
         private void btnPrijava_Click(object sender, EventArgs e)
-        {           
+        {
 
             var korisnickoIme = txtKorisnickoIme.Text;
             var lozinka = txtLozinka.Text;
 
             if (ValidanUnos())
-            {               
-                    foreach (var korisnik in InMemoryDB.Korisnici)
+            {
+                foreach (var korisnik in InMemoryDB.Korisnici)
+                {
+                    if (korisnickoIme == korisnik.KorisnickoIme && lozinka == korisnik.Lozinka)
                     {
-                        if (korisnickoIme == korisnik.KorisnickoIme && lozinka == korisnik.Lozinka)
+                        if (korisnik.Aktivan)
                         {
-                            if (korisnik.Aktivan)
-                            {
-                                MessageBox.Show($"{Resursi.Get(Kljucevi.DobroDosli)} {korisnik}",
-                                    Resursi.Get(Kljucevi.Informacija),
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Information);
-                                
-                                DLWMSApp.Korisnik = korisnik;
+                            MessageBox.Show($"{Resursi.Get(Kljucevi.DobroDosli)} {korisnik}",
+                                Resursi.Get(Kljucevi.Informacija),
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
 
-                            new frmGlavna().Show();
+                            DLWMSApp.Korisnik = korisnik;
 
+                            this.Hide();
 
-                            }
+                            var glavna = new frmGlavna();
+                            if (glavna.ShowDialog() == DialogResult.OK)//Odjava
+                                this.Show();
                             else
-                                MessageBox.Show($"{korisnik}, {Resursi.Get(Kljucevi.NalogNijeAktivan)}",
-                                    Resursi.Get(Kljucevi.Informacija),
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Warning);
-                            //{korisnik}, Vaš korisnički nalog nije aktivan
-                            //MessageBox.Show( string.Format(Resursi.Get(Kljucevi.NalogNijeAktivan),korisnik));
-                            return;
+                                this.Close();
+
+
+                        }
+                        else
+                            MessageBox.Show($"{korisnik}, {Resursi.Get(Kljucevi.NalogNijeAktivan)}",
+                                Resursi.Get(Kljucevi.Informacija),
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                        //{korisnik}, Vaš korisnički nalog nije aktivan
+                        //MessageBox.Show( string.Format(Resursi.Get(Kljucevi.NalogNijeAktivan),korisnik));
+                        return;
                     }
                 }
                 MessageBox.Show($"{Resursi.Get(Kljucevi.PodaciNisuValidni)}");
